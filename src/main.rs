@@ -137,7 +137,7 @@ impl TypeMapKey for FrameworkKey {
 async fn main() {
     init_logger();
 
-    println!("test cache7");
+    println!("test cache8");
 
     let honeycomb_api_key = std::env::var("HONEYCOMB_API_KEY").ok();
 
