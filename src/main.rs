@@ -135,7 +135,7 @@ impl TypeMapKey for FrameworkKey {
 async fn main() {
     init_logger();
 
-    println!("test cache8");
+    println!("test cache9");
 
     let config = Config::from_environment().expect("Failed to load experiment");
 
