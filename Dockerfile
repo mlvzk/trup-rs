@@ -3,9 +3,12 @@ FROM rust:1.54 AS builder
 WORKDIR /usr/local/src/robbb
 
 COPY Cargo.toml Cargo.lock ./
-RUN --mount=type=cache,target=/usr/local/cargo/registry \
-    --mount=type=cache,target=/usr/local/cargo/git \
-    --mount=type=cache,target=/usr/local/src/robbb/target \
+RUN \
+# These lines are commented for better caching in CI.
+# You can uncomment them for local development.
+#    --mount=type=cache,target=/usr/local/cargo/registry \
+#    --mount=type=cache,target=/usr/local/cargo/git \
+#    --mount=type=cache,target=/usr/local/src/robbb/target \
     mkdir src && echo "fn main() {}" >src/main.rs && cargo build --release && rm -rf src
 
 COPY sqlx-data.json ./
