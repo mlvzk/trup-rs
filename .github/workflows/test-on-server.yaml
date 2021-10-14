@@ -1,0 +1,44 @@
+name: Test on server
+
+# TODO: run on user input
+on:
+  workflow_dispatch:
+    inputs:
+      git_clone_arg:
+        description: "git clone <your argument> (example: https://github.com/unixporn/robbb.git)"
+        required: true
+      git_tag:
+        description: "git tag"
+        required: true
+
+jobs:
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - run: |
+          apt-get install -y jq
+
+      - run: |
+          git clone "${{github.event.inputs.git_clone_arg}}" source
+          cd source
+          git checkout "${{github.event.inputs.git_tag}}"
+
+      - name: Install rust stable
+        uses: actions-rs/toolchain@v1
+
+      - uses: Swatinem/rust-cache@v1
+
+      - name: Build
+        run: |
+          VERSION="$(git log --format=oneline -n 1 HEAD)" cargo build --locked
+
+      - name: Generate environment variables
+        environment: test
+        run: echo -e "$GUILD\n$TOKEN\n" | ./gen-env.sh >.env
+
+      - name: Start the bot
+        run: export $(cat .env) && ./target/debug/robbb
