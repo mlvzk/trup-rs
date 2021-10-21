@@ -141,6 +141,7 @@ impl TypeMapKey for FrameworkKey {
 
 #[tokio::main]
 async fn main() {
+    println!("pog28");
     init_logger();
 
     let honeycomb_api_key = std::env::var("HONEYCOMB_API_KEY").ok();
