@@ -10,10 +10,8 @@
         "stopOnEntry": false,
         "program": "/usr/bin/sh",
         "args": ["-c", "{ grep TOKEN .env || ./gen-env.sh >.env; } && export $(cat .env) && exec ${workspaceRoot}/target/debug/robbb"],
-        "preLaunchTask": "rust: cargo build",
+        "preLaunchTask": "Build",
         "cwd": "${workspaceRoot}",
-        "sourceLanguages": [
-            "rust"
-        ]
+        "sourceLanguages": ["rust"]
     }]
 }

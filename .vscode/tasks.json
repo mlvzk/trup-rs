@@ -4,6 +4,11 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Build",
+            "type": "shell",
+            "command": "cargo build"
+        },
+        {
             "label": "Generate .env",
             "type": "shell",
             "command": "printf '%s\\n%s\\n' \"${input:GUILD_ID}\" \"${input:DISCORD_TOKEN}\" | ./gen-env.sh > .env",
