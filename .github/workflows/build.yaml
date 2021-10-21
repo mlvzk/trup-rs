@@ -13,6 +13,7 @@ jobs:
   # See also https://docs.docker.com/docker-hub/builds/
   push:
     container: realcundo/docker-rust-aio
+    runs-on: ubuntu-latest
     if: github.event_name == 'push'
     strategy:
       max-parallel: 1
