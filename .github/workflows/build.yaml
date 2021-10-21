@@ -12,7 +12,6 @@ jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
-    container: realcundo/docker-rust-aio
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     strategy:
@@ -32,12 +31,12 @@ jobs:
             toolchain: "nightly"
 
     steps:
-      - uses: actions/checkout@v2
-
-      - run: sudo apt-get install -y lld
+      # - run: sudo apt-get install -y lld
 
       - name: Install rust
         uses: actions-rs/toolchain@v1
+
+      - uses: actions/checkout@v2
 
       - name: Rust version
         id: rust-version
