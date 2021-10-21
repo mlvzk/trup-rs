@@ -12,7 +12,7 @@ jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
-    runs-on: ubuntu-latest
+    container: realcundo/docker-rust-aio
     if: github.event_name == 'push'
     strategy:
       max-parallel: 1
