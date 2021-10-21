@@ -79,10 +79,7 @@ jobs:
             cargo build ${{ matrix.cargo_flags }} --locked &
           cargo_pid=$!
 
-          wait $prebuild_pid
-          if ! wait $cargo_pid; then
-            exit 1
-          fi
+          wait $prebuild_pid $cargo_pid
 
           cp target/${{ matrix.profile }}/robbb artifacts/
           docker build -t $IMAGE_ID -f Dockerfile artifacts/
