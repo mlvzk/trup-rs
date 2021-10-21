@@ -27,7 +27,7 @@ jobs:
             toolchain: "stable"
           - profile: debug
             cargo_flags: ""
-            cargo_env: "RUSTFLAGS='-C debuginfo=0 -Zgcc-ld=lld'"
+            cargo_env: "RUSTFLAGS='-C debuginfo=0 -C link-arg=-fuse-ld=lld'"
             toolchain: "nightly"
 
     steps:
@@ -37,9 +37,6 @@ jobs:
 
       - name: Install rust
         uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.toolchain }}
-          override: true
 
       - name: Rust version
         id: rust-version
